@@ -19,18 +19,18 @@ try:
 	from nltk.classify import scikitlearn
 	from sklearn.feature_extraction.text import TfidfTransformer
 	from sklearn.pipeline import Pipeline
-	from sklearn import ensemble, feature_selection, linear_model, naive_bayes, neighbors, svm, tree
+	from sklearn import ensemble, linear_model, naive_bayes, neighbors, svm, tree
 	
 	classifiers = [
 		ensemble.ExtraTreesClassifier,
 		ensemble.GradientBoostingClassifier,
 		ensemble.RandomForestClassifier,
 		linear_model.LogisticRegression,
-		#linear_model.SGDClassifier, # NOTE: this seems terrible, but could just be the options
+		linear_model.SGDClassifier,  # TODO: this seems terrible, but could just be the options
 		naive_bayes.BernoulliNB,
 		naive_bayes.GaussianNB,
 		naive_bayes.MultinomialNB,
-		neighbors.KNeighborsClassifier, # TODO: options for nearest neighbors
+		neighbors.KNeighborsClassifier,  # TODO: options for nearest neighbors
 		svm.LinearSVC,
 		svm.NuSVC,
 		svm.SVC,
@@ -73,6 +73,7 @@ sklearn_kwargs = {
 	'RandomForestClassifier': ['criterion', 'max_feats', 'depth_cutoff', 'n_estimators'],
 	# linear_model
 	'LogisticRegression': ['C','penalty'],
+	'SGDClassifier': ['C', 'max_iter', 'penalty'],
 	# naive_bayes
 	'BernoulliNB': ['alpha'],
 	'MultinomialNB': ['alpha'],
@@ -114,17 +115,24 @@ def add_sklearn_args(parser):
 # for mapping existing args to sklearn args
 sklearn_keys = {
 	'max_feats': 'max_features',
+	'max_iter': 'n_iter',
 	'depth_cutoff': 'max_depth'
 }
 
 def make_sklearn_classifier(algo, args):
 	name = algo.split('.', 1)[1]
 	kwargs = {}
-	
+
 	for key in sklearn_kwargs.get(name, []):
 		val = getattr(args, key, None)
 		if val: kwargs[sklearn_keys.get(key, key)] = val
-	
+
+	if algo == 'sklearn.SGDClassifier':
+		# replace C with alpha
+		if 'C' in kwargs:
+			kwargs['alpha'] = 1 / (kwargs['C'] * 50.0)
+			del kwargs['C']
+
 	if args.trace and kwargs:
 		print('training %s with %s' % (algo, kwargs))
 	
