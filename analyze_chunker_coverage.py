@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 import argparse, collections, math
 import nltk.corpus, nltk.corpus.reader, nltk.data, nltk.tag, nltk.metrics
-from nltk.corpus.util import LazyCorpusLoader
 from nltk_trainer import load_corpus_reader, load_model, simplify_wsj_tag
 from nltk_trainer.chunking import chunkers
 from nltk_trainer.chunking.transforms import node_label

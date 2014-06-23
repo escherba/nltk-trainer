@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import argparse, math, itertools, os.path
+import argparse, math, os.path
 import nltk.tag, nltk.chunk, nltk.chunk.util
 import nltk_trainer.classification.args
 from nltk.corpus.reader import IEERCorpusReader

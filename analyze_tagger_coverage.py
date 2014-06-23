@@ -1,7 +1,6 @@
 #!/usr/bin/env python
-import argparse, collections, math, os.path
+import argparse, collections, math
 import nltk.corpus, nltk.corpus.reader, nltk.data, nltk.tag, nltk.metrics
-from nltk.corpus.util import LazyCorpusLoader
 from nltk_trainer import load_corpus_reader, load_model, simplify_wsj_tag
 from nltk_trainer.tagging import taggers
 

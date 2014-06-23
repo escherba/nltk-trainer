@@ -1,6 +1,6 @@
 from nltk.tag.sequential import SequentialBackoffTagger
 from nltk.probability import FreqDist
-from nltk.tag import ClassifierBasedPOSTagger, TaggerI, str2tuple
+from nltk.tag import ClassifierBasedPOSTagger, TaggerI
 from nltk_trainer import iteritems
 from nltk_trainer.featx import phonetics
 from nltk_trainer.featx.metaphone import dm

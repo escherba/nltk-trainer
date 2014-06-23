@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 import argparse
 import collections
-import nltk.corpus
-from nltk.corpus.util import LazyCorpusLoader
 from nltk_trainer import basestring, load_corpus_reader, simplify_wsj_tag
 
 ########################################

@@ -1,1 +1,8 @@
 *.py[cod]
+
+# tests
+.roundup.*/
+
+# misc
+.ropeproject/
+*.egg-info/
