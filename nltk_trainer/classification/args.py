@@ -1,3 +1,4 @@
+import ast
 from nltk.classify import DecisionTreeClassifier, MaxentClassifier, NaiveBayesClassifier, megam
 from nltk_trainer import basestring
 from nltk_trainer.classification.multi import AvgProbClassifier
@@ -26,7 +27,7 @@ try:
 		ensemble.GradientBoostingClassifier,
 		ensemble.RandomForestClassifier,
 		linear_model.LogisticRegression,
-		linear_model.SGDClassifier,  # TODO: this seems terrible, but could just be the options
+		linear_model.SGDClassifier,
 		naive_bayes.BernoulliNB,
 		naive_bayes.GaussianNB,
 		naive_bayes.MultinomialNB,
@@ -72,15 +73,15 @@ sklearn_kwargs = {
 	'GradientBoostingClassifier': ['learning_rate', 'max_feats', 'depth_cutoff', 'n_estimators'],
 	'RandomForestClassifier': ['criterion', 'max_feats', 'depth_cutoff', 'n_estimators'],
 	# linear_model
-	'LogisticRegression': ['C','penalty'],
-	'SGDClassifier': ['C', 'max_iter', 'penalty'],
+	'LogisticRegression': ['C', 'penalty', 'class_weight'],
+	'SGDClassifier': ['C', 'max_iter', 'penalty', 'class_weight'],
 	# naive_bayes
 	'BernoulliNB': ['alpha'],
 	'MultinomialNB': ['alpha'],
 	# svm
-	'LinearSVC': ['C', 'loss', 'penalty'],
+	'LinearSVC': ['C', 'loss', 'penalty', 'class_weight'],
 	'NuSVC': ['nu', 'kernel'],
-	'SVC': ['C', 'kernel'],
+	'SVC': ['C', 'kernel', 'class_weight'],
 	# tree
 	'DecisionTreeClassifier': ['criterion', 'max_feats', 'depth_cutoff'],
 }
@@ -103,6 +104,8 @@ def add_sklearn_args(parser):
 		help='learning rate, default is %(default)s')
 	sklearn_group.add_argument('--loss', choices=['l1', 'l2'],
 		default='l2', help='loss function, default is %(default)s')
+	sklearn_group.add_argument('--class_weight', type=str,
+		help='Either "auto" or a dict specifying class weights, e.g. \{0:0.5,1:0.6\}'),
 	sklearn_group.add_argument('--n_estimators', type=int, default=10,
 		help='Number of trees for Decision Tree ensembles, default is %(default)s')
 	sklearn_group.add_argument('--nu', type=float, default=0.5,
@@ -125,7 +128,15 @@ def make_sklearn_classifier(algo, args):
 
 	for key in sklearn_kwargs.get(name, []):
 		val = getattr(args, key, None)
-		if val: kwargs[sklearn_keys.get(key, key)] = val
+		if val:
+			if key == 'class_weight':
+				try:
+					decoded_val = ast.literal_eval(val)
+				except ValueError:
+					decoded_val = val
+				finally:
+					val = decoded_val
+			kwargs[sklearn_keys.get(key, key)] = val
 
 	if algo == 'sklearn.SGDClassifier':
 		# replace C with alpha
