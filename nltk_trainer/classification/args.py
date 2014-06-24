@@ -74,7 +74,7 @@ sklearn_kwargs = {
 	'RandomForestClassifier': ['criterion', 'max_feats', 'depth_cutoff', 'n_estimators'],
 	# linear_model
 	'LogisticRegression': ['C', 'penalty', 'class_weight'],
-	'SGDClassifier': ['C', 'max_iter', 'penalty', 'class_weight'],
+	'SGDClassifier': ['C', 'max_iter', 'penalty', 'class_weight', 'sgd_loss'],
 	# naive_bayes
 	'BernoulliNB': ['alpha'],
 	'MultinomialNB': ['alpha'],
@@ -104,6 +104,9 @@ def add_sklearn_args(parser):
 		help='learning rate, default is %(default)s')
 	sklearn_group.add_argument('--loss', choices=['l1', 'l2'],
 		default='l2', help='loss function, default is %(default)s')
+	sklearn_group.add_argument('--sgd_loss', choices=['hinge', 'log', 'modified_huber',
+		'squared_hinge', 'perceptron', 'squared_loss', 'huber', 'epsilon_insensitive',
+		'squared_epsilon_insensitive'], default='hinge', help='loss function, default is %(default)s')
 	sklearn_group.add_argument('--class_weight', type=str,
 		help='Either "auto" or a dict specifying class weights, e.g. \{0:0.5,1:0.6\}'),
 	sklearn_group.add_argument('--n_estimators', type=int, default=10,
@@ -119,6 +122,7 @@ def add_sklearn_args(parser):
 sklearn_keys = {
 	'max_feats': 'max_features',
 	'max_iter': 'n_iter',
+	'sgd_loss': 'loss',
 	'depth_cutoff': 'max_depth'
 }
 
