@@ -2,13 +2,11 @@
 import argparse, math, itertools, os.path
 import nltk.corpus, nltk.data
 import nltk_trainer.classification.args
-from nltk.classify import DecisionTreeClassifier, MaxentClassifier, NaiveBayesClassifier
 # special case corpus readers
-from nltk.corpus.reader import SwitchboardCorpusReader, NPSChatCorpusReader, IndianCorpusReader
-from nltk.corpus.util import LazyCorpusLoader
+from nltk.corpus.reader import SwitchboardCorpusReader, NPSChatCorpusReader, \
+    IndianCorpusReader
 from nltk.tag import ClassifierBasedPOSTagger
 from nltk_trainer import dump_object, load_corpus_reader, simplify_wsj_tag
-from nltk_trainer.tagging import readers
 from nltk_trainer.tagging.training import train_brill_tagger
 from nltk_trainer.tagging.taggers import PhoneticClassifierBasedPOSTagger
 

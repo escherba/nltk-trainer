@@ -1,19 +1,16 @@
 #!/usr/bin/env python
-import argparse, collections, functools, itertools, math, operator, os.path, re, string, sys
+import argparse, collections, functools, math, operator, os.path, re, string, sys
 import nltk.data
 import nltk_trainer.classification.args
-from nltk.classify import DecisionTreeClassifier, MaxentClassifier, NaiveBayesClassifier
 from nltk.classify.util import accuracy
 from nltk.corpus import stopwords
-from nltk.corpus.reader import CategorizedPlaintextCorpusReader, CategorizedTaggedCorpusReader
-from nltk.corpus.util import LazyCorpusLoader
-from nltk.metrics import BigramAssocMeasures, f_measure, masi_distance, precision, recall
-from nltk.probability import FreqDist, ConditionalFreqDist
+from nltk.metrics import BigramAssocMeasures, f_measure, precision, recall
 from nltk.util import ngrams
-from nltk_trainer import dump_object, import_attr, iteritems, load_corpus_reader
+from nltk_trainer import dump_object, import_attr, iteritems, \
+    load_corpus_reader
 from nltk_trainer.classification import corpus, scoring
-from nltk_trainer.classification.featx import (bag_of_words, bag_of_words_in_set,
-	word_counts, train_test_feats, word_counts_in_set)
+from nltk_trainer.classification.featx import bag_of_words, \
+    bag_of_words_in_set, word_counts, word_counts_in_set
 from nltk_trainer.classification.multi import MultiBinaryClassifier
 
 ########################################

@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 import argparse, collections
-import nltk.corpus
 from nltk.tree import Tree
-from nltk.corpus.util import LazyCorpusLoader
 from nltk_trainer import load_corpus_reader, simplify_wsj_tag
 from nltk_trainer.chunking.transforms import node_label
 
