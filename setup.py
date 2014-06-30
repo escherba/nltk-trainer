@@ -1,12 +1,12 @@
 import os.path
-from setuptools import setup
+from setuptools import setup, find_packages
 
 def open_file(fname):
 	return open(os.path.join(os.path.dirname(__file__), fname))
 
 setup(
 	name='nltk-trainer',
-	packages=['nltk_trainer'],
+	packages=find_packages(exclude=['tests', 'docs']),
 	version='0.9',
 	description='Train NLTK objects with 0 code',
 	long_description=open_file('README.rst').read(),
