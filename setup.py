@@ -1,15 +1,13 @@
-import os.path
 from setuptools import setup, find_packages
+from pkg_resources import resource_string
 
-def open_file(fname):
-	return open(os.path.join(os.path.dirname(__file__), fname))
 
 setup(
 	name='nltk-trainer',
 	packages=find_packages(exclude=['tests', 'docs']),
 	version='0.9',
 	description='Train NLTK objects with 0 code',
-	long_description=open_file('README.rst').read(),
+	long_description=resource_string(__name__, 'README.rst'),
 	license='Apache',
 	author='Jacob Perkins',
 	author_email='japerk@gmail.com',
@@ -27,7 +25,7 @@ setup(
 		'train_classifier.py',
 		'train_tagger.py',
 	),
-	install_requires=[l.strip() for l in open_file('requirements.txt').readlines()],
+	install_requires=[l.strip() for l in resource_string(__name__, 'requirements.txt').split("\n")],
 	classifiers = [
 		'Development Status :: 4 - Beta',
 		'Environment :: Console',

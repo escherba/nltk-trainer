@@ -3,6 +3,9 @@
 # tests
 .roundup.*/
 
+build/
+dist/
+
 # misc
 .ropeproject/
 *.egg-info/
