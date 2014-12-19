@@ -1,3 +1,5 @@
+from nltk_trainer.writer import CorpusWriter
+
 
 class ClassifiedCorpusWriter(CorpusWriter):
 	def __init__(self, path, labels):

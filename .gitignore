@@ -6,6 +6,14 @@
 build/
 dist/
 
+# virtualenv
+env/
+
+# coverage
+cover/
+.coverage
+nosetests.xml
+
 # misc
 .ropeproject/
 *.egg-info/
