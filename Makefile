@@ -11,7 +11,7 @@ package: env
 test: dev
 	$(PYTHON) `which nosetests` $(NOSEARGS)
 	$(PYENV) py.test README.rst
-	roundup
+	$(PYENV) roundup
 
 dev: env requirements*.txt
 	rm -rf env/build
