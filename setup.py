@@ -83,7 +83,7 @@ DEPENDENCY_LINKS = list(set(itertools.chain(
 setup(
     name='nltk-trainer',
     packages=find_packages(exclude=['tests', 'docs']),
-    version='0.9',
+    version='0.9lf',
     description='Train NLTK objects with 0 code',
     long_description=resource_string(__name__, 'README.rst'),
     license='Apache',

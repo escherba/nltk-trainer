@@ -1,3 +1,5 @@
+__version__ = "0.9lf"
+
 import os, os.path, re, time
 import nltk.data
 from nltk.corpus.util import LazyCorpusLoader
