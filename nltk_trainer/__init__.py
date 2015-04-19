@@ -1,4 +1,4 @@
-__version__ = "0.9lf"
+__version__ = "0.10lf"
 
 import os, os.path, re, time
 import nltk.data

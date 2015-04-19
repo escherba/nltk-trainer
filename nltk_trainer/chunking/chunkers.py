@@ -18,7 +18,7 @@ def conll_tag_chunks(chunk_sents):
 	>>> from nltk.tree import Tree
 	>>> t = Tree('S', [Tree('NP', [('the', 'DT'), ('book', 'NN')])])
 	>>> conll_tag_chunks([t])
-	[[('DT', 'B-NP'), ('NN', 'I-NP')]]
+	[[('DT', u'B-NP'), ('NN', u'I-NP')]]
 	'''
 	tagged_sents = [tree2conlltags(tree) for tree in chunk_sents]
 	return [[(t, c) for (w, t, c) in sent] for sent in tagged_sents]

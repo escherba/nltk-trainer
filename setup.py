@@ -6,7 +6,7 @@ from glob import glob
 
 
 # dependency links
-SKIP_RE = re.compile(r'^\s*--find-links\s+(.*)$')
+SKIP_RE = re.compile(r'^\s*(?:-f|--find-links)\s+(.*)$')
 
 # Regex groups: 0: URL part, 1: package name, 2: package version
 EGG_RE = re.compile(r'^(.+)#egg=([a-z0-9_.]+)-([a-z0-9_.-]+)$')
@@ -83,7 +83,7 @@ DEPENDENCY_LINKS = list(set(itertools.chain(
 setup(
     name='nltk-trainer',
     packages=find_packages(exclude=['tests', 'docs']),
-    version='0.9lf',
+    version='0.10lf',
     description='Train NLTK objects with 0 code',
     long_description=resource_string(__name__, 'README.rst'),
     license='Apache',
